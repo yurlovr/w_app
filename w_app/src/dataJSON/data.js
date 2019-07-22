@@ -209,4 +209,5 @@ export const data = `[
     "price": 700,
     "description": "blue"
   }
-]`;
+]
+`;

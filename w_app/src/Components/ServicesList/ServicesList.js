@@ -8,7 +8,7 @@ export default class ServicesList extends Component {
   renderServiceItem = () => {
     return this.props.services.map(service => {
       return (
-        <li onClick={()=> console.log(service.id)} style={{backgroundColor:"grey"}}>
+        <li onClick={()=> console.log(service.id)} style={{backgroundColor:"grey"}} key={Math.random()}>
           <h4>{service.name}</h4>
           <a href="#">
             <img
