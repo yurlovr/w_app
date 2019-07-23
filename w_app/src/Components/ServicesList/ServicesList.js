@@ -1,28 +1,36 @@
 import React, { Component } from "react";
+import "./servicesList.scss";
 
 export default class ServicesList extends Component {
   state = {};
 
   componentDidMount() {}
 
+  handleClick = id => {
+    console.log(id);
+  };
+
   renderServiceItem = () => {
     return this.props.services.map(service => {
       return (
-        <li onClick={()=> console.log(service.id)} style={{backgroundColor:"grey"}} key={Math.random()}>
-          <h4>{service.name}</h4>
-          <a href="#">
+        <li
+          className="services-item col-3"
+          onClick={() => this.handleClick(service.id)}
+          key={Math.random()}
+        >
+          <h4 className="services-header">{service.name}</h4>
+          <div className="margin-auto">
             <img
+              className="services-img"
               src={service.cover}
               alt={service.name}
               width="267"
               height="267"
             />
-          </a>
-          <p>
-            <b>{service.price}</b>
-          </p>
-
-          <p>{service.description}</p>
+            <p className="services-price">
+              <b>Цена: {service.price} &#8381;</b>
+            </p>
+          </div>
         </li>
       );
     });
@@ -32,10 +40,10 @@ export default class ServicesList extends Component {
     return (
       <>
         <header>
-            <h2>Наши товары</h2>
+          <h2>Наши товары</h2>
         </header>
-        <div>
-          <ul style={{listStyle:"none"}}>{this.renderServiceItem()}</ul>
+        <div className="container">
+          <ul className="services-list row">{this.renderServiceItem()}</ul>
         </div>
       </>
     );

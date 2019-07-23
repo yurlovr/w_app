@@ -4,13 +4,13 @@ export const GET_DATA = {
     return new Promise((resolve, reject) =>
       setTimeout(() => {
         try {
-          resolve(JSON.parse(data));
+          resolve(parseJson(data));
         } catch (e) {
           reject(e);
         }
-      }, 5000)
+      }, 2000)
     ).then(data =>
-      data.filter((d, index) => array.find(item => item === index))
+      data.filter((d, index) => array.find(item => item === index )) // осмотреть
     );
   },
 
@@ -18,11 +18,15 @@ export const GET_DATA = {
     return new Promise((resolve, reject) =>
       setTimeout(() => {
         try {
-          resolve(JSON.parse(data).length);
+          resolve(parseJson(data).length);
         } catch (e) {
           reject(e);
         }
       }, 1000)
     );
   }
+};
+
+const parseJson =(data)=> {
+  return JSON.parse(data)
 };

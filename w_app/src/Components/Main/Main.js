@@ -45,7 +45,7 @@ export default class Main extends Component {
 
   render() {
     if (this.state.isError) {
-      return <Error />;
+      return <Error error={this.state.isError} />;
     }
 
     if (!this.state.loading) {
@@ -67,9 +67,12 @@ export default class Main extends Component {
     }
 
     return (
-        <section>
-        <ServicesList services={this.state.services}/>
-    </section>
+      <React.Fragment>
+        <section className="slider">СЛАЙДЕР</section>
+        <section className="main">
+          <ServicesList services={this.state.services} />
+        </section>
+      </React.Fragment>
     );
   }
 }
