@@ -10,7 +10,7 @@ export const GET_DATA = {
         }
       }, 2000)
     ).then(data =>
-      data.filter((d, index) => array.find(item => item === index )) // осмотреть
+      array.map(item => data[item] )
     );
   },
 
