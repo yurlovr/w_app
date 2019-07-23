@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import {Modal, Button} from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 
 export default class Basket extends Component {
   state = {};
 
   render() {
     return (
-
       <Modal
         {...this.props}
         size="lg"
@@ -14,18 +13,16 @@ export default class Basket extends Component {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Корзина
-          </Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter">Корзина</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <h4>Ваши товары</h4>
           <table className="cart-table">
-               <tbody>
-               <tr className="first-stroke-table">
-                   <td className="table-ice">
-                     <a className="close" href="#">
-                       <img
+            <tbody>
+              <tr className="first-stroke-table">
+                <td className="table-ice">
+                  <a className="close" href="#">
+                    <img
                       className="ice-in-catalog-cart"
                       src="./images/92a50329-cd3f-4fad-bc8f-04bca02e952e.jpg"
                       alt="Пломбир с апельсиновым джемом"
@@ -96,9 +93,9 @@ export default class Basket extends Component {
           </table>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.onHide}>Закрыть</Button>
-          <Button onClick={()=>window.print()}>Печать</Button>
-          <Button onClick={()=>console.log("Наш заказ - ")}>Купить</Button>
+          <Button onClick={() => this.props.onHide(false)}>Закрыть</Button>
+          <Button onClick={() => window.print()}>Печать</Button>
+          <Button onClick={() => console.log("Наш заказ - ")}>Купить</Button>
         </Modal.Footer>
       </Modal>
     );

@@ -1,9 +1,9 @@
 import React from "react";
-import Basket from "../../Components/Basket/Basket";
+//import Basket from "../../Components/Basket/Basket";
 import { Button } from "react-bootstrap";
 
-export default function Header() {
-  const [modalShow, setModalShow] = React.useState(false);
+export default function Header(props) {
+  // const [modalShow, setModalShow] = React.useState(false);
 
   return (
     <div
@@ -16,15 +16,14 @@ export default function Header() {
       }}
     >
       <Button variant="light" onClick={() => console.log("main Menu")}>
-          Меню
+        Меню
       </Button>
-        <Button variant="light" onClick={() => console.log("about Us")}>
-            О Нас
-        </Button>
-        <Button variant="light" onClick={() => setModalShow(true)}>
-            Корзина
-        </Button>
-      <Basket show={modalShow} onHide={() => setModalShow(false)} />
+      <Button variant="light" onClick={() => console.log("about Us")}>
+        О Нас
+      </Button>
+      <Button variant="light" onClick={() => props.setModalShow(true)}>
+        Корзина
+      </Button>
     </div>
   );
 }

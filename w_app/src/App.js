@@ -8,6 +8,7 @@ import Error from "./Components/Error/Error";
 import { GET_DATA } from "./dataJSON/getDataFromServer";
 import randomInteger from "./helperFunction/randomInteger";
 import { Const } from "./Const/Const";
+import Basket from "./Components/Basket/Basket";
 
 const countServicesForRender = randomInteger(Const.min, Const.max);
 
@@ -15,7 +16,8 @@ export default class App extends Component {
   state = {
     loading: false,
     services: [],
-    isError: false
+    isError: false,
+    showBasket: false
   };
 
   componentDidMount() {
@@ -46,6 +48,10 @@ export default class App extends Component {
     return indexArray;
   };
 
+  setModalShow = bool => {
+    this.setState({ showBasket: bool });
+  };
+
   render() {
     if (this.state.isError) {
       return <Error error={this.state.isError} />;
@@ -70,7 +76,8 @@ export default class App extends Component {
 
     return (
       <>
-        <Header />
+        <Basket show={this.state.showBasket} onHide={this.setModalShow} />
+        <Header setModalShow={this.setModalShow} />
         <Slider />
         <Main services={this.state.services} />
         <Footer />
