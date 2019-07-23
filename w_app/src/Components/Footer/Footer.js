@@ -1,5 +1,6 @@
 import React from "react";
+import "./footer.scss";
 
 export default function Footer () {
-    return <div style={{width: 100+"%", height: 100, borderWidth:1, borderColor:"black", borderStyle:"solid"}}>Footer</div>;
+    return <footer className="footer"/>
 }

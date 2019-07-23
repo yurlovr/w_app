@@ -1,0 +1,32 @@
+
+.carousel {
+  background-color: beige;
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 10px -6px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+
+  &-inner {
+    width: 20%;
+    margin: 0 auto;
+  }
+
+  &-control-next {
+    right: 300px;
+  }
+
+  &-control-prev {
+    left: 300px;
+  }
+
+  &-caption {
+    color: #10c7d2;
+    text-shadow: 1px 2px 3px rgba(6, 18, 51, 0.6);
+    & > h3 {
+      font-weight: bold;
+    }
+  }
+}
+
+img.d-block.w-100 {
+  border-radius: 50%;
+}

@@ -7,7 +7,7 @@ export default class ServicesList extends Component {
   componentDidMount() {}
 
   handleClick = id => {
-    console.log(id);
+    this.props.openService(id);
   };
 
   renderServiceItem = () => {
@@ -40,7 +40,7 @@ export default class ServicesList extends Component {
     return (
       <>
         <header>
-          <h2>Наши товары</h2>
+          <h2 className="services-header -main">Наши товары</h2>
         </header>
         <div className="container">
           <ul className="services-list row">{this.renderServiceItem()}</ul>

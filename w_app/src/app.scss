@@ -1,0 +1,21 @@
+body {
+  width: 1280px;
+  margin: 0 auto;
+  height: 100%;
+}
+#root {
+  flex: 1 0 auto;
+}
+
+.spinner {
+  height: 50px;
+  position: fixed;
+  top: 40%;
+  left: 40%;
+  &-text {
+    vertical-align: super;
+    color: #007bff;
+    font-style: italic;
+  }
+}
+

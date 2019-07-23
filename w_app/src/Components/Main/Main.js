@@ -5,7 +5,7 @@ export default class Main extends Component {
   render() {
     return (
       <section className="main">
-        <ServicesList services={this.props.services} />
+        <ServicesList services={this.props.services} openService={this.props.openService} />
       </section>
     );
   }

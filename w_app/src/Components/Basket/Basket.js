@@ -1,10 +1,56 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
+import "./basket.scss";
+import {Const} from "../../Const/Const";
 
 export default class Basket extends Component {
   state = {};
 
+
+  renderTable = array => {
+    return array.map(item => {
+      return (
+        <tr className="first-stroke-table" key={Math.random()}>
+          <td className="table-ice">
+            <img
+              className="ice-in-catalog-cart"
+              src={item.cover}
+              alt={item.name}
+              width="33"
+              height="33"
+            />
+          </td>
+
+          <td className="table-ice-name">
+           <span>
+              {item.name}
+            </span>
+          </td>
+
+          <td className="table-ice-count">
+            <button className="table-ice-count -button" onClick={() => this.addClick(item.id)}> + </button>
+            <span>{item.count} шт.</span>
+            <button className="table-ice-count -button"> - </button>
+          </td>
+          <td className="table-ice-price">
+            <span>{item.price} &#8381;</span>
+          </td>
+          <td className="table-ice-total">
+            <span>{item.count * item.price} &#8381;</span>
+          </td>
+        </tr>
+      );
+    });
+  };
+
+  addClick = (id) => {
+    this.props.changecount(Const.ADD,id);
+  };
+
   render() {
+    let order = this.props.order;
+
+
     return (
       <Modal
         {...this.props}
@@ -17,80 +63,14 @@ export default class Basket extends Component {
         </Modal.Header>
         <Modal.Body>
           <h4>Ваши товары</h4>
-          <table className="cart-table">
-            <tbody>
-              <tr className="first-stroke-table">
-                <td className="table-ice">
-                  <a className="close" href="#">
-                    <img
-                      className="ice-in-catalog-cart"
-                      src="./images/92a50329-cd3f-4fad-bc8f-04bca02e952e.jpg"
-                      alt="Пломбир с апельсиновым джемом"
-                      width="33"
-                      height="33"
-                    />
-                  </a>
-                </td>
 
-                <td className="table-ice-name">
-                  <a className="ice-name a-black" href="#">
-                    {" "}
-                    Пломбир с апельсиновым джемом{" "}
-                  </a>
-                </td>
-
-                <td className="table-ice-mass">
-                  <span>1,5кг ×</span>
-                </td>
-                <td className="table-ice-price">
-                  <span>200 руб.</span>
-                </td>
-                <td className="table-ice-total">
-                  <span>300 руб.</span>
-                </td>
-              </tr>
-
-              <tr>
-                <td className="table-ice">
-                  <a className="close" href="#">
-                    <img
-                      className="ice-in-catalog-cart"
-                      src="./images/52cf4552-f244-47f5-87d8-1e10e74e03e4.jpg"
-                      alt="Клубничный пломбир с присыпкой из белого шоколада"
-                      width="33"
-                      height="33"
-                    />
-                  </a>
-                </td>
-
-                <td className="table-ice-name">
-                  <a className="ice-name a-black" href="#">
-                    {" "}
-                    Клубничный пломбир с присыпкой из белого шоколада
-                  </a>
-                </td>
-
-                <td className="table-ice-mass">
-                  <span>1,5кг ×</span>
-                </td>
-                <td className="table-ice-price">
-                  <span>300 руб.</span>
-                </td>
-                <td className="table-ice-total">
-                  <span>450 руб.</span>
-                </td>
-              </tr>
-
-              <tr>
-                <td />
-                <td />
-                <td />
-                <td className="total" colSpan="2">
-                  Итого: 750 руб.
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          {!order.length ? (
+            <div>Корзина пуста</div>
+          ) : (
+            <table className="cart-table">
+              <tbody>{this.renderTable(order)}</tbody>
+            </table>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => this.props.onHide(false)}>Закрыть</Button>
