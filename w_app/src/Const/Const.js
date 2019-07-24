@@ -4,4 +4,8 @@ export const Const = {
     ADD: "add",
     DISSMISS: "dissmiss",
     DELETE: "delete",
+    ACTIONS: {
+        FETCH_DATA_LENGTH: "FETCH_DATA_LENGTH",
+        FETCH_DATA_ARRAY: "FETCH_DATA_ARRAY",
+    }
 };

@@ -30,3 +30,5 @@ export const GET_DATA = {
 const parseJson =(data)=> {
   return JSON.parse(data)
 };
+
+
