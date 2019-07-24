@@ -12,6 +12,7 @@ export default class Basket extends Component {
       return (
         <tr className="first-stroke-table" key={Math.random()}>
           <td className="table-ice">
+            <span onClick={() => this.handleClick(Const.DELETE, item.id)}/>
             <img
               className="ice-in-catalog-cart"
               src={item.cover}
@@ -28,9 +29,9 @@ export default class Basket extends Component {
           </td>
 
           <td className="table-ice-count">
-            <button className="table-ice-count -button" onClick={() => this.addClick(item.id)}> + </button>
+            <span className="table-ice-count -button" onClick={() => this.handleClick(Const.ADD, item.id)}> + </span>
             <span>{item.count} шт.</span>
-            <button className="table-ice-count -button"> - </button>
+            <span className="table-ice-count -button" onClick={() => this.handleClick(Const.DISSMISS, item.id)}> - </span>
           </td>
           <td className="table-ice-price">
             <span>{item.price} &#8381;</span>
@@ -43,8 +44,8 @@ export default class Basket extends Component {
     });
   };
 
-  addClick = (id) => {
-    this.props.changecount(Const.ADD,id);
+  handleClick = (action, id) => {
+    this.props.onEnter(action, id);
   };
 
   render() {

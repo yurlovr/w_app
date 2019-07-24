@@ -15,13 +15,14 @@ td {
   padding-left: 42px;
   padding-top: 12px;
   position: relative;
-  &::before {
+  & > span {
     position: absolute;
     content: "";
     width: 11px;
     height: 11px;
     top: 26px;
     left: 15px;
+    cursor: pointer;
     background-image: url("../../svg/cross-small.svg");
   }
 

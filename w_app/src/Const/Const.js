@@ -3,4 +3,5 @@ export const Const = {
     max: 10,
     ADD: "add",
     DISSMISS: "dissmiss",
+    DELETE: "delete",
 };

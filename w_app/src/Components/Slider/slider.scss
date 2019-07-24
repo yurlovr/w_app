@@ -1,9 +1,10 @@
-
 .carousel {
   background-color: beige;
   margin-bottom: 20px;
-  box-shadow: 0px 4px 10px -6px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 10px -6px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 
   &-inner {
     width: 20%;
@@ -19,14 +20,81 @@
   }
 
   &-caption {
-    color: #10c7d2;
-    text-shadow: 1px 2px 3px rgba(6, 18, 51, 0.6);
     & > h3 {
-      font-weight: bold;
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      font-size: 30px;
+      color: #10c7d2;
+      top: -400%;
+      left: 34%;
+      text-shadow: 1px 2px 3px rgba(6, 18, 51, 0.6);
+    }
+
+    & > p {
+      position: absolute;
+      top: -138%;
+      left: 2%;
+      color: #10c7d2;
+      font-size: 22px;
+      font-weight: 600;
+      font-style: italic;
+      text-shadow: 1px 2px 3px rgba(6, 18, 51, 0.6);
+      text-align: center;
     }
   }
 }
 
 img.d-block.w-100 {
   border-radius: 50%;
+}
+
+.images {
+  &-list {
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    background-color: beige;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px -6px rgba(0, 0, 0, 0.5);
+  }
+
+  &-item {
+    margin-right: 50px;
+    position: relative;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &-img {
+    border-radius: 50%;
+  }
+
+  &-header {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    font-weight: 500;
+    color: #10c7d2;
+    top: 15%;
+    left: 38%;
+    text-shadow: 1px 2px 3px rgba(6, 18, 51, 0.6);
+  }
+
+  &-name {
+    position: absolute;
+    top: 53%;
+    left: 20%;
+    max-width: 170px;
+    color: #10c7d2;
+    font-size: 22px;
+    font-weight: 600;
+    font-style: italic;
+    text-shadow: 1px 2px 3px rgba(6, 18, 51, 0.6);
+    text-align: center;
+  }
 }

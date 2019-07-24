@@ -88,8 +88,7 @@ export default class App extends Component {
     });
   };
 
-    changecount = (action, id) => {
-
+  changeCount = (action, id) => {
     let item = this.state.orderState.find(item => item.id === id);
 
     switch (action) {
@@ -105,6 +104,34 @@ export default class App extends Component {
             }
           })
         });
+        break;
+      case Const.DISSMISS:
+        item.count = item.count - 1;
+        if (item.count) {
+          this.setState({
+            ...this.state,
+            orderState: this.state.orderState.map(i => {
+              if (i.id === id) {
+                return item;
+              } else {
+                return i;
+              }
+            })
+          });
+          break;
+        } else {
+          this.setState({
+            ...this.state,
+            orderState: this.state.orderState.filter(i => i.id !== id)
+          });
+          break;
+        }
+      default:
+        this.setState({
+          ...this.state,
+          orderState: this.state.orderState.filter(i => i.id !== id)
+        });
+        break;
     }
   };
 
@@ -128,7 +155,7 @@ export default class App extends Component {
           show={this.state.showBasket}
           onHide={this.setModalShow}
           order={this.state.orderState}
-          changecount={this.changecount}
+          onEnter={this.changeCount}
         />
         <Header setModalShow={this.setModalShow} />
         {this.state.openService ? (
@@ -140,7 +167,7 @@ export default class App extends Component {
           />
         ) : (
           <>
-            <Slider />
+            <Slider services={this.state.services} />
             <Main
               services={this.state.services}
               openService={this.openService}

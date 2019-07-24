@@ -43,7 +43,9 @@ export default class ServicesList extends Component {
           <h2 className="services-header -main">Наши товары</h2>
         </header>
         <div className="container">
-          <ul className="services-list row">{this.renderServiceItem()}</ul>
+          <ul className="services-list row" style={this.props.services.length < 3 ? {justifyContent: "center"} : {}}>
+            {this.renderServiceItem()}
+          </ul>
         </div>
       </>
     );
