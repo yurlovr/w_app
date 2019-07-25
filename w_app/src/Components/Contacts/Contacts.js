@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const AboutUs = () => {
+export const Contacts = () => {
   return (
     <div>
-      О нас
+      Как нас найти )))yurlovr@gmail.com
       <Link to="/main"> На главную </Link>
     </div>
   );

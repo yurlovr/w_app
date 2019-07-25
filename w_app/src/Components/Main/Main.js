@@ -3,7 +3,7 @@ import ServicesList from "../../Components/ServicesList/ServicesList";
 import Slider from "../Slider/Slider";
 import Basket from "../Basket/Basket";
 import {connect} from "react-redux";
-import {getData, GetShowBasket} from "../../Actions/data";
+import {getData, GetShowBasket} from "../../Actions/actionData";
 
  class Main extends Component {
   render() {

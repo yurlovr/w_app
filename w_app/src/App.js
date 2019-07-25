@@ -2,48 +2,45 @@ import React, { Component } from "react";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Main from "./Components/Main/Main";
-import Slider from "./Components/Slider/Slider";
 import { Spinner } from "react-bootstrap";
 import Error from "./Components/Error/Error";
-import { GET_DATA } from "./dataJSON/getDataFromServer";
-import randomInteger from "./helperFunction/randomInteger";
-import { Const } from "./Const/Const";
-import Basket from "./Components/Basket/Basket";
 import ServiceItem from "./Components/ServiceItem/ServiceItem";
 import "./app.scss";
 import { connect } from "react-redux";
-
+import { Switch, Route} from "react-router-dom";
+import { NotFound } from "./Components/NotFound/NotFound";
+import { AboutUs } from "./Components/AboutUs/AboutUs";
+import {Contacts} from "./Components/Contacts/Contacts";
 
 class App extends Component {
-
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-   if(!this.props.isLoading) {
-     return true;
-   }
-   if(this.props.isError) {
-     return true;
-   }
-    if(this.props.allServices.length && this.props.isLoading ) {
+    if (!this.props.isLoading) {
+      return true;
+    }
+    if (this.props.isError) {
+      return true;
+    }
+    if (this.props.allServices.length && this.props.isLoading) {
       return false;
     }
   }
 
   // this.loadDataLength()
-    //   .then(dataLength => this.randomIndex(dataLength))
-    //   .then(indexArray => this.loadServices(indexArray))
-    //   .then(services =>
-    //     this.setState({ ...this.state, services: services, loading: true })
-    //   )
-    //   .catch(() =>
-    //     this.setState({ ...this.state, isError: true, loading: true })
-    //   );
+  //   .then(dataLength => this.randomIndex(dataLength))
+  //   .then(indexArray => this.loadServices(indexArray))
+  //   .then(services =>
+  //     this.setState({ ...this.state, services: services, loading: true })
+  //   )
+  //   .catch(() =>
+  //     this.setState({ ...this.state, isError: true, loading: true })
+  //   );
 
-    //this.props.store.dispatch(services());
+  //this.props.store.dispatch(services());
 
   //
   // loadDataLength = async () => {
-  //   return await GET_DATA.getDataLength();
-  // };
+  //   //   return await GET_DATA.getDataLength();
+  //   // };
   //
   // loadServices = async indexArray => {
   //   return await GET_DATA.getDataFromServer(indexArray);
@@ -139,20 +136,39 @@ class App extends Component {
   //   }
   // };
 
-  dataForRender = () => {
-    let indexArray = getRandomIndex(this.props.allServices.length);
-    return indexArray.map(item => this.props.allServices[item]);
+  // dataForRender = () => {
+  //     let indexArray = getRandomIndex(this.props.allServices.length);
+  //     return indexArray.map(item => this.props.allServices[item]);
+  // };
+
+  // {["/","/main","/home" ].map(item =>
+  //
+  // <Route exact path="/" component={() =>
+  // {return ( <Main
+  //         services={this.props.allServices}
+  //         {...this.props}/>
+  //     />
+  //
+  //     />
+  // )
+  // )
+
+  homePage = () => {
+    return ["/", "/home", "/main"].map(path => (
+      <Route
+        exact
+        path={path}
+        component={() => (
+          <Main services={this.props.allServices} {...this.props} />
+        )}
+        key={Math.random()}
+      />
+    ));
   };
 
-
-
   render() {
-
-
-
-
-
     console.log("RENDER_________________________________");
+    console.log(this.props);
     if (this.props.isError) {
       return <Error />;
     }
@@ -167,50 +183,34 @@ class App extends Component {
     }
     return (
       <>
+        <Header />
 
+        <Switch>
+          {this.homePage()}
 
+          <Route
+            path="/service/:Id"
+            component={() => <ServiceItem service={this.props.allServices} {...this.props} />}
+          />
 
-        <Header  />
-        <Main
-          services={this.dataForRender()}
-        />
-      <Footer />
+          <Route path="/about" component={AboutUs} />
+            <Route path="/contacts" component={Contacts} />
+          <Route path="*" component={NotFound} />
+        </Switch>
+        <Footer />
       </>
     );
-
-    //
-    //
-    //     {this.state.openService ? (
-    //       <ServiceItem
-    //         service={this.state.service}
-    //         inBasket={this.inBasket}
-    //         onHide={this.setModalShow}
-    //         openService={this.openService}
-    //       />
-    //     ) : (
-    //   </>
-    // );
   }
 }
 
+
 export default connect(
-  state => ({
+    (state, ownProps) => ({
     isError: state.isError,
     isLoading: state.isLoading,
     allServices: state.allServices,
+        ownProps
   }),
   dispatch => ({
-    // onAddTrack: (name) => {
-    //   const payload = {
-    //     id: Date.now().toString(),
-    //     name
-    //   };
-    //   dispatch({ type: 'ADD_TRACK', payload });
-    // },
-    // onFindTrack: (name) => {
-    //   console.log('name', name);
-    //   dispatch({ type: 'FIND_TRACK', payload: name});
-    // },
-
   })
 )(App);

@@ -1,40 +1,37 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from 'redux';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-
-import {Switch, BrowserRouter, Route } from 'react-router-dom'
-
-import { syncHistoryWithStore } from 'react-router-redux'
-import {rootReducer} from "./Reducers/index";
+import {Route} from 'react-router';
+import { ConnectedRouter } from 'connected-react-router'
 import App from './App';
-import {NotFound} from './Components/NotFound/NotFound';
-import "./app.scss";
-import {getData} from "./Actions/data";
-import {AboutUs} from "./Components/AboutUs/AboutUs";
+import {fetchData} from "./dataJSON/getDataFromServer"
+import {getData, isError} from "./Actions/actionData"
+import { createBrowserHistory } from 'history'
+import { applyMiddleware, compose, createStore } from 'redux'
+import { routerMiddleware } from 'connected-react-router'
+import createRootReducer from './Reducers'
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
-// const history  = syncHistoryWithStore(browserHistory , store);
+const history = createBrowserHistory();
+const store = createStore(createRootReducer(history),{}, compose(
+    composeWithDevTools(applyMiddleware(routerMiddleware(history),thunk))));
 
 
 if(!store.getState().isLoading) {
-  console.log(store.getState());
-    store.dispatch(getData());
+    console.log(store.getState());
 
+    fetchData()
+        .then((data) => store.dispatch(getData(data)))
+        .catch(() => store.dispatch(isError(true))
+        );
 }
 
 ReactDOM.render(
-  <Provider store={store}>
-    {/*<App/>*/}
-    <BrowserRouter>
-      <Switch>
-      <Route exact path="/" component={App}/>
-        <Route path="/about" component={AboutUs}/>
-      <Route path="*" component={NotFound}/>
-      </Switch>
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById("root")
+    <Provider store={store}>
+        <ConnectedRouter history={history}>
+            <Route path="/" component={App}/>
+        </ConnectedRouter>
+    </Provider>,
+    document.getElementById('root')
 );

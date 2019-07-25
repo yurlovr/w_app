@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "./basket.scss";
-import {Const} from "../../Const/Const";
 import {connect} from "react-redux";
-import {getData, GetShowBasket} from "../../Actions/data";
-import {changeCount} from "../../Actions/data";
+import {addCountBasket,dissmissCountBasket, deleteFromBasket} from "../../Actions/actionBasket";
 
-export default class Basket extends Component {
+class Basket extends Component {
 
 
   renderTable = array => {
@@ -14,7 +12,7 @@ export default class Basket extends Component {
       return (
         <tr className="first-stroke-table" key={Math.random()}>
           <td className="table-ice">
-            <span onClick={() => this.handleClick(Const.DELETE, item.id)}/>
+            <span onClick={() => this.props.onDeleteFromBasket(item)}/>
             <img
               className="ice-in-catalog-cart"
               src={item.cover}
@@ -31,9 +29,9 @@ export default class Basket extends Component {
           </td>
 
           <td className="table-ice-count">
-            <span className="table-ice-count -button" onClick={() => this.handleClick(Const.ADD, item.id)}> + </span>
+            <span className="table-ice-count -button" onClick={() => this.props.onAddCountBasket(item)}> + </span>
             <span>{item.count} шт.</span>
-            <span className="table-ice-count -button" onClick={() => this.handleClick(Const.DISSMISS, item.id)}> - </span>
+            <span className="table-ice-count -button" onClick={() => this.props.onDissmissCountBasket(item)}> - </span>
           </td>
           <td className="table-ice-price">
             <span>{item.price} &#8381;</span>
@@ -51,8 +49,9 @@ export default class Basket extends Component {
   };
 
   render() {
-    let order = this.props.order;
+    let order = this.props.serviceOrder;
 
+    console.log("order", this.props.order);
 
     return (
       <Modal
@@ -67,18 +66,18 @@ export default class Basket extends Component {
         <Modal.Body>
           <h4>Ваши товары</h4>
 
-          {/*{!order.length ? (*/}
+          {!order || !order.length ? (
             <div>Корзина пуста</div>
-          {/*) : (*/}
-          {/*  <table className="cart-table">*/}
-          {/*    <tbody>{this.renderTable(order)}</tbody>*/}
-          {/*  </table>*/}
-          {/*)}*/}
+          ) : (
+            <table className="cart-table">
+              <tbody>{this.renderTable(order)}</tbody>
+            </table>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => this.props.onHide(false)}>Закрыть</Button>
           <Button onClick={() => window.print()}>Печать</Button>
-          <Button onClick={() => console.log("Наш заказ - ")}>Купить</Button>
+          <Button onClick={() => console.log("Наш заказ - ", this.props.serviceOrder)}>Купить</Button>
         </Modal.Footer>
       </Modal>
     );
@@ -86,30 +85,19 @@ export default class Basket extends Component {
 }
 
 
-// export default connect(
-//   state => ({
-//     serviceOrder: state.serviceOrder,
-//   }),
-//   dispatch => ({
-//     // onAddTrack: (name) => {
-//     //   const payload = {
-//     //     id: Date.now().toString(),
-//     //     name
-//     //   };
-//     //   dispatch({ type: 'ADD_TRACK', payload });
-//     // },
-//     // onFindTrack: (name) => {
-//     //   console.log('name', name);
-//     //   dispatch({ type: 'FIND_TRACK', payload: name});
-//     // },
-//
-//     onGetChangeCount: (id) => {
-//       dispatch(changeCount(id));
-//     },
-//
-//     onGetData: () => {
-//       dispatch(getData());
-//     },
-//     onGetShowBasket: (bool) => dispatch(GetShowBasket(bool)),
-//   })
-// )(App);
+export default connect(
+  state => ({
+    serviceOrder: state.orderState,
+  }),
+  dispatch => ({
+     onAddCountBasket: (service) => {
+       dispatch(addCountBasket(service));
+     },
+      onDissmissCountBasket: (service) => {
+          dispatch(dissmissCountBasket(service));
+      },
+      onDeleteFromBasket: (service) => {
+          dispatch(deleteFromBasket(service));
+      },
+ })
+ )(Basket);

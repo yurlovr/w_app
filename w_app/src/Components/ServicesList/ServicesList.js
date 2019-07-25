@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./servicesList.scss";
+import {Link} from "react-router-dom";
 
 export default class ServicesList extends Component {
   state = {};
@@ -15,9 +16,9 @@ export default class ServicesList extends Component {
       return (
         <li
           className="services-item col-3"
-          onClick={() => this.handleClick(service.id)}
           key={Math.random()}
         >
+          <Link to={`service/${service.id}`}>
           <h4 className="services-header">{service.name}</h4>
           <div className="margin-auto">
             <img
@@ -31,6 +32,7 @@ export default class ServicesList extends Component {
               <b>Цена: {service.price} &#8381;</b>
             </p>
           </div>
+          </Link>
         </li>
       );
     });
