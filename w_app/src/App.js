@@ -11,37 +11,35 @@ import { Const } from "./Const/Const";
 import Basket from "./Components/Basket/Basket";
 import ServiceItem from "./Components/ServiceItem/ServiceItem";
 import "./app.scss";
+import { connect } from "react-redux";
 
-import  {getData}  from './Actions/data';
-
-import { connect } from 'react-redux';
-
-const countServicesForRender = randomInteger(Const.min, Const.max);
 
 class App extends Component {
-  // state = {
-  //   loading: false,
-  //   services: [],
-  //   isError: false,
-  //   showBasket: false,
-  //   openService: false,
-  //   service: {},
-  //   orderState: []
-  // };
 
-  // componentDidMount() {
-  //   this.loadDataLength()
-  //     .then(dataLength => this.randomIndex(dataLength))
-  //     .then(indexArray => this.loadServices(indexArray))
-  //     .then(services =>
-  //       this.setState({ ...this.state, services: services, loading: true })
-  //     )
-  //     .catch(() =>
-  //       this.setState({ ...this.state, isError: true, loading: true })
-  //     );
-  //
-  //   //this.props.store.dispatch(services());
-  // }
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+   if(!this.props.isLoading) {
+     return true;
+   }
+   if(this.props.isError) {
+     return true;
+   }
+    if(this.props.allServices.length && this.props.isLoading ) {
+      return false;
+    }
+  }
+
+  // this.loadDataLength()
+    //   .then(dataLength => this.randomIndex(dataLength))
+    //   .then(indexArray => this.loadServices(indexArray))
+    //   .then(services =>
+    //     this.setState({ ...this.state, services: services, loading: true })
+    //   )
+    //   .catch(() =>
+    //     this.setState({ ...this.state, isError: true, loading: true })
+    //   );
+
+    //this.props.store.dispatch(services());
+
   //
   // loadDataLength = async () => {
   //   return await GET_DATA.getDataLength();
@@ -141,35 +139,47 @@ class App extends Component {
   //   }
   // };
 
-  render() {
-    return (
-    <>
+  dataForRender = () => {
+    let indexArray = getRandomIndex(this.props.allServices.length);
+    return indexArray.map(item => this.props.allServices[item]);
+  };
 
-      <button onClick={this.props.onGetData}> click2</button>
-        </>
+
+
+  render() {
+
+
+
+
+
+    console.log("RENDER_________________________________");
+    if (this.props.isError) {
+      return <Error />;
+    }
+
+    if (!this.props.isLoading) {
+      return (
+        <section className="spinner">
+          <Spinner animation="grow" variant="primary" />{" "}
+          <span className="spinner-text">Идет загрузка услуг...</span>
+        </section>
+      );
+    }
+    return (
+      <>
+
+
+
+        <Header  />
+        <Main
+          services={this.dataForRender()}
+        />
+      <Footer />
+      </>
     );
-    // if (this.state.isError) {
-    //   return <Error error={this.state.isError} />;
-    // }
+
     //
-    // if (!this.state.loading) {
-    //   return (
-    //     <section className="spinner">
-    //       <Spinner animation="grow" variant="primary" />{" "}
-    //       <span className="spinner-text">Идет загрузка услуг...</span>
-    //     </section>
-    //   );
-    // }
     //
-    // return (
-    //   <>
-    //     <Basket
-    //       show={this.state.showBasket}
-    //       onHide={this.setModalShow}
-    //       order={this.state.orderState}
-    //       onEnter={this.changeCount}
-    //     />
-    //     <Header setModalShow={this.setModalShow} />
     //     {this.state.openService ? (
     //       <ServiceItem
     //         service={this.state.service}
@@ -178,38 +188,29 @@ class App extends Component {
     //         openService={this.openService}
     //       />
     //     ) : (
-    //       <>
-    //         <Slider services={this.state.services} />
-    //         <Main
-    //           services={this.state.services}
-    //           openService={this.openService}
-    //         />
-    //       </>
-    //     )}
-    //     <Footer />
     //   </>
     // );
   }
 }
 
 export default connect(
-    state => ({
-   //   tracks: state.tracks.filter(track => track.name.includes(state.filterTracks))
-    }),
-    dispatch => ({
-      // onAddTrack: (name) => {
-      //   const payload = {
-      //     id: Date.now().toString(),
-      //     name
-      //   };
-      //   dispatch({ type: 'ADD_TRACK', payload });
-      // },
-      // onFindTrack: (name) => {
-      //   console.log('name', name);
-      //   dispatch({ type: 'FIND_TRACK', payload: name});
-      // },
-      onGetData: () => {
-        dispatch(getData());
-      }
-    })
+  state => ({
+    isError: state.isError,
+    isLoading: state.isLoading,
+    allServices: state.allServices,
+  }),
+  dispatch => ({
+    // onAddTrack: (name) => {
+    //   const payload = {
+    //     id: Date.now().toString(),
+    //     name
+    //   };
+    //   dispatch({ type: 'ADD_TRACK', payload });
+    // },
+    // onFindTrack: (name) => {
+    //   console.log('name', name);
+    //   dispatch({ type: 'FIND_TRACK', payload: name});
+    // },
+
+  })
 )(App);

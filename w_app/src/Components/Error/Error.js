@@ -1,11 +1,8 @@
 import React from "react";
 import {Alert} from "react-bootstrap";
 
-export default function Error ({error}) {
+export default function Error () {
 
-    //const [error, setShow] = useState(true);
-
-      if(error) {
           return (
           <Alert variant="danger"
                  //onClose={() => setShow(false)}
@@ -18,5 +15,4 @@ export default function Error ({error}) {
               </p>
           </Alert>
           );
-      }
 }

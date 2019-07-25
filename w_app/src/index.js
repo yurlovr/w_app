@@ -1,17 +1,40 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import App from "./App";
 import { Provider } from "react-redux";
-import reducer from "./Reducers";
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
+import {Switch, BrowserRouter, Route } from 'react-router-dom'
+
+import { syncHistoryWithStore } from 'react-router-redux'
+import {rootReducer} from "./Reducers/index";
+import App from './App';
+import {NotFound} from './Components/NotFound/NotFound';
+import "./app.scss";
+import {getData} from "./Actions/data";
+import {AboutUs} from "./Components/AboutUs/AboutUs";
+
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+// const history  = syncHistoryWithStore(browserHistory , store);
+
+
+if(!store.getState().isLoading) {
+  console.log(store.getState());
+    store.dispatch(getData());
+
+}
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    {/*<App/>*/}
+    <BrowserRouter>
+      <Switch>
+      <Route exact path="/" component={App}/>
+        <Route path="/about" component={AboutUs}/>
+      <Route path="*" component={NotFound}/>
+      </Switch>
+    </BrowserRouter>
   </Provider>,
   document.getElementById("root")
 );

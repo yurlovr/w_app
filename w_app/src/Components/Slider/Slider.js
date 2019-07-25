@@ -3,6 +3,7 @@ import { Carousel } from "react-bootstrap";
 import "./slider.scss";
 
 export default function Slider(props) {
+  console.log(props);
   const renderSlider = () => {
     return props.services.map(service => {
       return (

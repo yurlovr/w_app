@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "./basket.scss";
 import {Const} from "../../Const/Const";
+import {connect} from "react-redux";
+import {getData, GetShowBasket} from "../../Actions/data";
+import {changeCount} from "../../Actions/data";
 
 export default class Basket extends Component {
-  state = {};
 
 
   renderTable = array => {
@@ -65,13 +67,13 @@ export default class Basket extends Component {
         <Modal.Body>
           <h4>Ваши товары</h4>
 
-          {!order.length ? (
+          {/*{!order.length ? (*/}
             <div>Корзина пуста</div>
-          ) : (
-            <table className="cart-table">
-              <tbody>{this.renderTable(order)}</tbody>
-            </table>
-          )}
+          {/*) : (*/}
+          {/*  <table className="cart-table">*/}
+          {/*    <tbody>{this.renderTable(order)}</tbody>*/}
+          {/*  </table>*/}
+          {/*)}*/}
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => this.props.onHide(false)}>Закрыть</Button>
@@ -82,3 +84,32 @@ export default class Basket extends Component {
     );
   }
 }
+
+
+// export default connect(
+//   state => ({
+//     serviceOrder: state.serviceOrder,
+//   }),
+//   dispatch => ({
+//     // onAddTrack: (name) => {
+//     //   const payload = {
+//     //     id: Date.now().toString(),
+//     //     name
+//     //   };
+//     //   dispatch({ type: 'ADD_TRACK', payload });
+//     // },
+//     // onFindTrack: (name) => {
+//     //   console.log('name', name);
+//     //   dispatch({ type: 'FIND_TRACK', payload: name});
+//     // },
+//
+//     onGetChangeCount: (id) => {
+//       dispatch(changeCount(id));
+//     },
+//
+//     onGetData: () => {
+//       dispatch(getData());
+//     },
+//     onGetShowBasket: (bool) => dispatch(GetShowBasket(bool)),
+//   })
+// )(App);
