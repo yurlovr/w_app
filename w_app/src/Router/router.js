@@ -2,8 +2,8 @@ import React from "react";
 import {Route, Switch} from "react-router";
 import App from "../App";
 import ServiceItem from "../Components/ServiceItem/ServiceItem";
-import {AboutUs} from "../Components/AboutUs/AboutUs";
-import {Contacts} from "../Components/Contacts/Contacts";
+import AboutUs from "../Components/AboutUs/AboutUs";
+import Contacts from "../Components/Contacts/Contacts";
 import {NotFound} from "../Components/NotFound/NotFound";
 
 

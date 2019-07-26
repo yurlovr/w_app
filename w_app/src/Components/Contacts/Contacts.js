@@ -1,12 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./contacts.scss";
+import Basket from "../Basket/Basket";
+import {connect} from "react-redux";
 
-export const Contacts = () => {
+function Contacts(props) {
   return (
-    <div className="contacts">
-      Как нас найти )))yurlovr@gmail.com
-      <Link to="/"> На главную </Link>
-    </div>
+    <>
+      <Basket show={props.showBasket} />
+      <div className="contacts">
+        Как нас найти )))yurlovr@gmail.com
+        <Link to="/"> На главную </Link>
+      </div>
+    </>
   );
-};
+}
+
+export default connect((state) => ({
+    showBasket: state.showBasket,
+}))(Contacts);

@@ -1,12 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./about.scss";
+import Basket from "../Basket/Basket";
+import {connect} from "react-redux";
 
-export const AboutUs = () => {
+function AboutUs (props){
   return (
-    <div className="about">
-      О нас
-      <Link to="/"> На главную </Link>
-    </div>
+    <>
+      <Basket show={props.showBasket} />
+      <div className="about">
+        О нас
+        <Link to="/"> На главную </Link>
+      </div>
+    </>
   );
-};
+}
+
+export default connect((state) => ({
+    showBasket: state.showBasket,
+}))(AboutUs);
