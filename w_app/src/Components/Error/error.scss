@@ -1,0 +1,13 @@
+.error {
+  height: 650px;
+  & .fade.alert {
+    max-width: 50%;
+    margin: 0 auto;
+    position: relative;
+    top: 26%;
+    & > div,
+    p {
+      padding-left: 20px;
+    }
+  }
+}

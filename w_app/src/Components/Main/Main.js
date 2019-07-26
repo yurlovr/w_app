@@ -7,17 +7,15 @@ class Main extends Component {
   render() {
     return (
       <>
-        <Slider services={this.props.services} />
+        <Slider services={this.props.allServices} />
         <section className="main">
-          <ServicesList services={this.props.services} />
+          <ServicesList services={this.props.allServices} />
         </section>
       </>
     );
   }
 }
-export default connect(
-  state => ({
-    showBasket: state.showBasket
-  }),
-  dispatch => ({})
-)(Main);
+export default connect(state => ({
+  showBasket: state.showBasket,
+  allServices: state.allServices
+}))(Main);

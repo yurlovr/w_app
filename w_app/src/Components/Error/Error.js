@@ -1,23 +1,28 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
 import { connect } from "react-redux";
+import "./error.scss";
 
 function Error() {
   return (
-    <Alert variant="danger" dismissible>
-      <Alert.Heading>Произошла ошибка!!!</Alert.Heading>
-      <p>
-        Скорее всего мы обновляем Наш ассортимент.
-        Приходите к Нам в магазин.
-        С Вас ложка, с Нас мороженое. Мы будем рады Вас видеть.
-        Ну а в сети встретимся в другой раз
-      </p>
-    </Alert>
+    <section className="error">
+      <Alert variant="danger">
+        <Alert.Heading>Что-то пошло не так )))</Alert.Heading>
+        <p>
+          Скорее всего мы обновляем Наш ассортимент.
+          <br />
+          Приходите к Нам в магазин.
+          <br />
+          С Вас ложка, a с Нас мороженое!
+          <br />
+          Мы будем рады видеть Вас.
+          <br />
+          Ну, а в сети, встретимся в другой раз.
+        </p>
+      </Alert>
+    </section>
   );
 }
-export default connect(
-  state => ({
-    isError: state.isError
-  }),
-  dispatch => ({})
-)(Error);
+export default connect(state => ({
+  isError: state.isError
+}))(Error);

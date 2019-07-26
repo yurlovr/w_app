@@ -6,7 +6,7 @@ export const AboutUs = () => {
   return (
     <div className="about">
       О нас
-      <Link to="/main"> На главную </Link>
+      <Link to="/"> На главную </Link>
     </div>
   );
 };

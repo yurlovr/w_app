@@ -4,7 +4,7 @@ import "./notFound.scss";
 
 export const NotFound = () => {
   return (
-    <div className="nfound">
+    <div className="notfound">
       Страница не найдена.
       <Link to="/"> На главную </Link>
     </div>

@@ -2,7 +2,6 @@ import { Const } from "../Const/Const";
 
 export const orderState = (state = [], action) => {
   switch (action.type) {
-
     case Const.ACTIONS.PUT_IN_BASKET:
       if (state.some(service => service.id === action.order.id)) {
         return state.map(service =>
@@ -30,9 +29,9 @@ export const orderState = (state = [], action) => {
         return state.filter(service => service.id !== action.order.id);
       } else {
         return state.map(service =>
-          service.id !== action.order.id
-            ? service
-            : { ...service, count: service.count - 1 }
+          service.id === action.order.id
+            ? { ...service, count: service.count - 1 }
+            : service
         );
       }
 

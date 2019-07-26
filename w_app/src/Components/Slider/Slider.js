@@ -1,9 +1,9 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
 import "./slider.scss";
+import { Const } from "../../Const/Const";
 
 export default function Slider(props) {
-  console.log(props);
   const renderSlider = () => {
     return props.services.map(service => {
       return (
@@ -26,11 +26,7 @@ export default function Slider(props) {
     return props.services.map(service => {
       return (
         <li className="images-item" key={Math.random()}>
-          <img
-            className="images-img"
-            src={service.cover}
-            alt={service.name}
-          />
+          <img className="images-img" src={service.cover} alt={service.name} />
           <h3 className="images-header">{service.price} &#8381;</h3>
           <p className="images-name">{service.name}</p>
         </li>
@@ -38,7 +34,7 @@ export default function Slider(props) {
     });
   };
 
-  if (props.services.length > 3) {
+  if (props.services.length > Const.SLIDER_ITEM) {
     return <Carousel>{renderSlider()}</Carousel>;
   } else {
     return <ul className="images-list">{renderBlockImages()}</ul>;

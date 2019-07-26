@@ -32,7 +32,7 @@ class Header extends Component {
   }
 }
 export default connect(
-  state => ({}),
+  null,
   dispatch => ({
     onGetShowBasket: bool => dispatch(GetShowBasket(bool))
   })

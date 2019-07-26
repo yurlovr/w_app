@@ -3,35 +3,26 @@ import randomInteger from "../helperFunction/randomInteger";
 import { Const } from "../Const/Const";
 import { dataIsLoading } from "../Actions/actionData";
 
-let countServicesForRender = randomInteger(Const.min, Const.max);
+const countServicesForRender = randomInteger(Const.min, Const.max);
 
-export const GET_DATA = {
-  getDataFromServer: () => {
-    return new Promise((resolve, reject) =>
-      setTimeout(() => {
-        try {
-          resolve(parseJson(data));
-        } catch (e) {
-          reject(e);
-        }
-      }, 2000)
-    );
-    //     .then(data =>
-    //   array.map(item => data[item] )
-    // );
-  },
+export const fetchData = async () => {
+  await dataIsLoading(false);
+  let arrayFromServer = await getDataFromServer();
+  let indexArray = await getRandomIndex(arrayFromServer.length);
+  await dataIsLoading(true);
+  return indexArray.map(item => arrayFromServer[item]);
+};
 
-  getDataLength: () => {
-    return new Promise((resolve, reject) =>
-      setTimeout(() => {
-        try {
-          resolve(parseJson(data).length);
-        } catch (e) {
-          reject(e);
-        }
-      }, 1000)
-    );
-  }
+const getDataFromServer = () => {
+  return new Promise((resolve, reject) =>
+    setTimeout(() => {
+      try {
+        resolve(parseJson(data));
+      } catch (e) {
+        reject(e);
+      }
+    }, 2000)
+  );
 };
 
 const parseJson = data => {
@@ -49,12 +40,4 @@ const getRandomIndex = dataLength => {
     }
   }
   return indexArray;
-};
-
-export const fetchData = async () => {
-  await dataIsLoading(false);
-  let arrayFromServer = await GET_DATA.getDataFromServer();
-  let indexArray = await getRandomIndex(arrayFromServer.length);
-  await dataIsLoading(true);
-  return indexArray.map(item => arrayFromServer[item]);
 };
