@@ -7,10 +7,6 @@ import { putInBasket, GetShowBasket } from "../../Actions/actionBasket";
 import Basket from "../Basket/Basket";
 
 class ServiceItem extends Component {
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
-    return this.props.isLoading !== nextProps.isLoading;
-  }
-
   renderButtons = () => {
     return (
       <ul className="item-buttons">
@@ -40,8 +36,6 @@ class ServiceItem extends Component {
   };
 
   render() {
-    console.log("RENDER_ITEM!!!!");
-
     let service = this.props.service;
     if (!this.props.service) {
       this.props.history.push("/");

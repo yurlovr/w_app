@@ -25,6 +25,12 @@ class Basket extends Component {
     });
   };
 
+  summOrder = () => {
+    return this.props.serviceOrder.reduce((sum, current) => {
+      return sum + current.count * current.price;
+    }, 0);
+  };
+
   render() {
     let order = this.props.serviceOrder;
     return (
@@ -44,9 +50,16 @@ class Basket extends Component {
           {!order || !order.length ? (
             <div>Корзина пуста</div>
           ) : (
-            <table className="cart-table">
-              <tbody>{this.renderTable(order)}</tbody>
-            </table>
+            <>
+              <table className="cart-table">
+                <tbody>{this.renderTable(order)}</tbody>
+              </table>
+              <div className="total-order-sum-wrap">
+                <p className="total-order-sum">
+                  Итого: {this.summOrder()} &#8381;
+                </p>
+              </div>
+            </>
           )}
         </Modal.Body>
         <Modal.Footer>

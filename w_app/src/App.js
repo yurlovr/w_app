@@ -20,7 +20,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("RENDRE___MAIN");
     if (this.props.isError) {
       return <Error />;
     }

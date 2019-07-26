@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function BasketTable(props) {
-  console.log(props);
   return (
     <tr className="first-stroke-table">
       <td className="table-ice">

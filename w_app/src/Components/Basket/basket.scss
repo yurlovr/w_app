@@ -76,6 +76,17 @@ td {
   font-weight: 700;
   text-align: right;
   color: #323232;
+  &-order-sum-wrap {
+    display: flex;
+    margin-right: 60px;
+  }
+  &-order-sum {
+    margin-top: 20px;
+    margin-bottom: 0;
+    margin-left: auto;
+    font-size: 18px;
+    font-weight: 400;
+  }
 }
 
 .ice-in-catalog-cart {

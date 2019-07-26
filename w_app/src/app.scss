@@ -7,6 +7,14 @@ body {
   flex: 1 0 auto;
 }
 
+.container {
+  min-width: 1280px;
+}
+
+.row {
+  min-width: 1075px;
+}
+
 a:hover {
   text-decoration: none;
 }
