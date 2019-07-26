@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { putInBasket, GetShowBasket } from "../../Actions/actionBasket";
 
 class ServiceItem extends Component {
-  state = {};
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     return this.props.isLoading !== nextProps.isLoading;
@@ -41,6 +40,9 @@ class ServiceItem extends Component {
   };
 
   render() {
+
+    console.log("RENDER_ITEM!!!!")
+
     let service = this.props.service;
     return (
       <section className="item">

@@ -1,10 +1,14 @@
 body {
   width: 1280px;
-  margin: 0 auto;
   height: 100%;
+  margin: 0 auto;
 }
 #root {
   flex: 1 0 auto;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 .spinner {
@@ -14,8 +18,8 @@ body {
   left: 40%;
   &-text {
     vertical-align: super;
-    color: #007bff;
     font-style: italic;
+    color: #007bff;
   }
 }
 

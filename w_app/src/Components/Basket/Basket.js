@@ -1,61 +1,36 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "./basket.scss";
-import {connect} from "react-redux";
-import {addCountBasket,dissmissCountBasket, deleteFromBasket} from "../../Actions/actionBasket";
+import { connect } from "react-redux";
+import {
+  addCountBasket,
+  dissmissCountBasket,
+  deleteFromBasket,
+  GetShowBasket
+} from "../../Actions/actionBasket";
+import BasketTable from "./BasketTable";
 
 class Basket extends Component {
-
-
   renderTable = array => {
     return array.map(item => {
       return (
-        <tr className="first-stroke-table" key={Math.random()}>
-          <td className="table-ice">
-            <span onClick={() => this.props.onDeleteFromBasket(item)}/>
-            <img
-              className="ice-in-catalog-cart"
-              src={item.cover}
-              alt={item.name}
-              width="33"
-              height="33"
-            />
-          </td>
-
-          <td className="table-ice-name">
-           <span>
-              {item.name}
-            </span>
-          </td>
-
-          <td className="table-ice-count">
-            <span className="table-ice-count -button" onClick={() => this.props.onAddCountBasket(item)}> + </span>
-            <span>{item.count} шт.</span>
-            <span className="table-ice-count -button" onClick={() => this.props.onDissmissCountBasket(item)}> - </span>
-          </td>
-          <td className="table-ice-price">
-            <span>{item.price} &#8381;</span>
-          </td>
-          <td className="table-ice-total">
-            <span>{item.count * item.price} &#8381;</span>
-          </td>
-        </tr>
+        <BasketTable
+          key={Math.random()}
+          service={item}
+          onAddCountBasket={this.props.onAddCountBasket}
+          onDissmissCountBasket={this.props.onDissmissCountBasket}
+          onDeleteFromBasket={this.props.onDeleteFromBasket}
+        />
       );
     });
   };
 
-  handleClick = (action, id) => {
-    this.props.onEnter(action, id);
-  };
-
   render() {
     let order = this.props.serviceOrder;
-
-    console.log("order", this.props.order);
-
     return (
       <Modal
-        {...this.props}
+        show={this.props.showBasket}
+        onHide={() => this.props.onGetShowBasket(false)}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -75,29 +50,36 @@ class Basket extends Component {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={() => this.props.onHide(false)}>Закрыть</Button>
+          <Button onClick={() => this.props.onGetShowBasket(false)}>
+            Закрыть
+          </Button>
           <Button onClick={() => window.print()}>Печать</Button>
-          <Button onClick={() => console.log("Наш заказ - ", this.props.serviceOrder)}>Купить</Button>
+          <Button
+            onClick={() => console.log("Наш заказ - ", this.props.serviceOrder)}
+          >
+            Купить
+          </Button>
         </Modal.Footer>
       </Modal>
     );
   }
 }
 
-
 export default connect(
   state => ({
     serviceOrder: state.orderState,
+    showBasket: state.showBasket
   }),
   dispatch => ({
-     onAddCountBasket: (service) => {
-       dispatch(addCountBasket(service));
-     },
-      onDissmissCountBasket: (service) => {
-          dispatch(dissmissCountBasket(service));
-      },
-      onDeleteFromBasket: (service) => {
-          dispatch(deleteFromBasket(service));
-      },
- })
- )(Basket);
+    onAddCountBasket: service => {
+      dispatch(addCountBasket(service));
+    },
+    onDissmissCountBasket: service => {
+      dispatch(dissmissCountBasket(service));
+    },
+    onDeleteFromBasket: service => {
+      dispatch(deleteFromBasket(service));
+    },
+    onGetShowBasket: bool => dispatch(GetShowBasket(bool))
+  })
+)(Basket);

@@ -1,10 +1,10 @@
 .carousel {
   background-color: beige;
   margin-bottom: 20px;
-  box-shadow: 0 4px 10px -6px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
   padding-top: 20px;
   padding-bottom: 20px;
+  box-shadow: 0 4px 10px -6px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
 
   &-inner {
     width: 20%;
@@ -52,19 +52,19 @@ img.d-block.w-100 {
 
 .images {
   &-list {
+    display: flex;
+    justify-content: center;
     margin-bottom: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
-    display: flex;
-    justify-content: center;
     background-color: beige;
     border-radius: 10px;
-    box-shadow: 0px 4px 10px -6px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 10px -6px rgba(0, 0, 0, 0.5);
   }
 
   &-item {
-    margin-right: 50px;
     position: relative;
+    margin-right: 50px;
     &:last-child {
       margin-right: 0;
     }

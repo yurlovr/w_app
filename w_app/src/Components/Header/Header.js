@@ -3,25 +3,16 @@ import { Button } from "react-bootstrap";
 import "./header.scss";
 import { connect } from "react-redux";
 import { GetShowBasket } from "../../Actions/actionBasket";
-import Basket from "../Basket/Basket";
 import { Link } from "react-router-dom";
 
 class Header extends Component {
   render() {
     return (
       <>
-        {this.props.onGetShowBasket && (
-          <Basket
-            show={this.props.showBasket}
-            onHide={() => this.props.onGetShowBasket(false)}
-          />
-        )}
         <header className="header">
           <ul className="header-buttons">
             <li>
-              <Link to="/contacts">
-                Контакты
-              </Link>
+              <Link to="/contacts">Контакты</Link>
             </li>
             <li>
               <Link to="/about">О Нас</Link>
@@ -41,9 +32,7 @@ class Header extends Component {
   }
 }
 export default connect(
-  state => ({
-    showBasket: state.showBasket
-  }),
+  state => ({}),
   dispatch => ({
     onGetShowBasket: bool => dispatch(GetShowBasket(bool))
   })

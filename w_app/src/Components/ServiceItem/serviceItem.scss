@@ -8,8 +8,8 @@
   min-height: 650px;
 
   &-header {
-    text-align: center;
     margin-bottom: 20px;
+    text-align: center;
   }
 
   &-wrapper {
@@ -18,17 +18,17 @@
   }
 
   &-image {
-    border-radius: 50%;
-    margin-right: 100px;
     max-height: 267px;
     min-width: 267px;
+    margin-right: 100px;
+    border-radius: 50%;
   }
   &-description {
+    min-width: 770px;
     margin-bottom: 15px;
     padding: 25px;
     border-radius: 10px;
     border: 1px solid #d9d9d9;
-    min-width: 770px;
   }
 
   &-price {
@@ -52,17 +52,17 @@
     margin-right: 15px;
     & > a {
       display: block;
+      padding: 0.375rem 0.75rem;
       font-weight: 400;
       color: #212529;
       text-align: center;
       vertical-align: middle;
+      font-size: 1rem;
+      line-height: 1.5;
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
-      padding: 0.375rem 0.75rem;
-      font-size: 1rem;
-      line-height: 1.5;
       border-radius: 0.25rem;
       transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
         border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
