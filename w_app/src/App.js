@@ -29,7 +29,7 @@ class App extends Component {
         <div className="spinner-wrap">
           <section className="spinner">
             <Spinner animation="grow" variant="primary" />{" "}
-            <span className="spinner-text">Идет загрузка услуг...</span>
+            <span className="spinner-text">Идет загрузка...</span>
           </section>
         </div>
       );

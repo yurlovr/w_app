@@ -28,14 +28,14 @@
       font-weight: 500;
       color: #10c7d2;
       top: -400%;
-      left: 29%;
+      right: 0;
       text-shadow: 1px 2px 3px rgba(6, 18, 51, 0.6);
     }
 
     & > p {
       position: absolute;
       top: -138%;
-      left: 2%;
+      left: 0;
       color: #10c7d2;
       font-size: 22px;
       font-weight: 600;
@@ -64,7 +64,7 @@ img.d-block.w-100 {
 
   &-item {
     position: relative;
-    margin-right: 50px;
+    margin-right: 40px;
     &:last-child {
       margin-right: 0;
     }
@@ -89,8 +89,8 @@ img.d-block.w-100 {
   &-name {
     position: absolute;
     top: 53%;
-    left: 20%;
-    max-width: 170px;
+    left: 28%;
+    max-width: 120px;
     color: #10c7d2;
     font-size: 22px;
     font-weight: 600;
