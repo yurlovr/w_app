@@ -8,13 +8,13 @@ import Basket from "./Components/Basket/Basket";
 
 class App extends Component {
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    if (!this.props.isLoading) {
+    if (this.props.isLoading) {
       return true;
     }
     if (this.props.isError) {
       return true;
     }
-    if (this.props.allServices.length && this.props.isLoading) {
+    if (this.props.allServices.length && !this.props.isLoading) {
       return false;
     }
   }
@@ -24,7 +24,7 @@ class App extends Component {
       return <Error />;
     }
 
-    if (!this.props.isLoading) {
+    if (this.props.isLoading) {
       return (
         <div className="spinner-wrap">
           <section className="spinner">

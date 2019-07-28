@@ -15,7 +15,7 @@ class Basket extends Component {
     return array.map(item => {
       return (
         <BasketTable
-          key={Math.random()}
+          key={item.id}
           service={item}
           onAddCountBasket={this.props.onAddCountBasket}
           onDissmissCountBasket={this.props.onDissmissCountBasket}

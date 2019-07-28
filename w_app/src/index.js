@@ -9,7 +9,7 @@ import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import { Routing } from "./Router/router";
 
-if (!store.getState().isLoading) {
+if (store.getState().isLoading) {
   fetchData()
     .then(data => store.dispatch(getData(data)))
     .catch(() => store.dispatch(isError(true)));
